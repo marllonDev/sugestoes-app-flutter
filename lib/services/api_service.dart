@@ -13,7 +13,7 @@ class ApiService {
     return 'http://localhost:5000';
   }
 
-  // A função que vai enviar a sugestão para o backend.
+  // A função que vai enviar a sugestão para o backend.(POST)
   // Ela é 'async' porque operações de rede não são instantâneas.
   static Future<bool> enviarSugestao(Map<String, dynamic> dados) async {
     final url = Uri.parse('$baseUrl/sugestao');
@@ -51,4 +51,36 @@ class ApiService {
       return false;
     }
   }
+
+//  FUNÇÃO PARA BUSCAR DADOS (GET)
+  static Future<List<Map<String, dynamic>>> buscarSugestoes() async {
+    final url = Uri.parse('$baseUrl/sugestoes');
+    
+    try {
+      // Executa a chamada GET e aguarda a resposta.
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        // Se a resposta for sucesso (200 OK):
+        // 1. Pega o corpo da resposta (que é uma string JSON).
+        // 2. Decodifica a string JSON para um objeto Dart (será uma Lista de Mapas).
+        final List<dynamic> corpoDecodificado = jsonDecode(response.body);
+        
+        // Converte a lista de 'dynamic' para o tipo que esperamos.
+        final List<Map<String, dynamic>> sugestoes = List.castFrom(corpoDecodificado);
+        
+        print('✅ ${sugestoes.length} sugestões recebidas da API.');
+        return sugestoes;
+      } else {
+        // Se o servidor respondeu com um erro.
+        print('❌ Erro no servidor ao buscar sugestões: ${response.statusCode}');
+        return []; // Retorna uma lista vazia em caso de erro.
+      }
+    } catch (e) {
+      // Se houve um erro de conexão.
+      print('🔥 Erro de conexão ao buscar sugestões: $e');
+      return []; // Retorna uma lista vazia em caso de erro.
+    }
+  }
+
 }
