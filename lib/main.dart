@@ -11,7 +11,7 @@ class MeuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Caixa de Sugestões',
+      title: 'CAIXA DE SUGESTÕES',
       // Removemos o 'debugShowCheckedModeBanner' para um visual mais limpo
       debugShowCheckedModeBanner: false, 
       theme: ThemeData(

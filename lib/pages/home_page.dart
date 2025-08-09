@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 248, 162, 49),
-        title: const Text('Caixa de Sugestões'),
+        title: const Text('CAIXA DE SUGESTÕES'),
         centerTitle: true,
         // 4. A propriedade 'bottom' da AppBar é o local ideal para a TabBar.
         bottom: TabBar(

@@ -15,17 +15,14 @@ class ApiService {
 
   // A função que vai enviar a sugestão para o backend.
   // Ela é 'async' porque operações de rede não são instantâneas.
-  static Future<bool> enviarSugestao(String sugestao) async {
-    // Montamos a URL completa do endpoint.
+  static Future<bool> enviarSugestao(Map<String, dynamic> dados) async {
     final url = Uri.parse('$baseUrl/sugestao');
 
     // Tentamos executar a chamada de rede.
     try {
       // O corpo (body) da nossa requisição.
       // Usamos 'jsonEncode' para transformar nosso mapa Dart em uma string JSON.
-      final body = jsonEncode({
-        'sugestao': sugestao,
-      });
+      final body = jsonEncode(dados);
 
       // Aqui a chamada HTTP acontece!
       // - url: O endereço de destino.
